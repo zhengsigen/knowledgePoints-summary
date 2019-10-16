@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Test4 {
+public class RedEnvelopes {
     /*
         1.4. 抢红包
     抢红包大致要求:

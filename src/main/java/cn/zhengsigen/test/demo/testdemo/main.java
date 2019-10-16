@@ -8,17 +8,8 @@ import java.util.Arrays;
 public class main {
 
     public static void main(String[] args) throws ParseException, IOException {
-//        Test3 test3 = new Test3();
-//        test3.test();
-////        Test4 test4 = new Test4();
-////        test4.test();
-//
-//        File file = new File("src/main/resources/字体");
-//        Test5 test5 = new Test5();
-//        //删除
-////        test5.delFile(file);
-//        test5.copyFile();
-
+//        DeleteAndCopy deleteAndCopy = new DeleteAndCopy();
+//        deleteAndCopy.copyFiles();
         //单向链表
 //        ImplementLinked implementLinked = new ImplementLinked();
 //        implementLinked.add(11);
@@ -33,7 +24,6 @@ public class main {
 //        System.out.println(implementLinked.indexOf(33));
 //        implementLinked.remove(2);
 //        implementLinked.lists();
-
 
     }
 }

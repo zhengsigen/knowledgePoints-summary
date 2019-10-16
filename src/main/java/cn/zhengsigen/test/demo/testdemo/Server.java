@@ -13,17 +13,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
-     1.6. 基于网络实现群聊、私聊
-     私聊：@ip或@昵称，只需要发送指定用户消息
-     消息发送格式：@192.168.0.0 在
-     消息反馈格式:  反馈消息 201x-xx-xx xx:xx:xx  192.168.0.0  发送成功或发送失败(下线)
-     消息接收格式：私聊消息 201x-xx-xx xx:xx:xx  192.168.0.0  \n 在
-     群聊：向所有在线的用户全部发送消息（自己发消息所有人接收，自己不收接收）
-     消息发送格式：在
-     消息接收格式：群聊消息 201x-xx-xx xx:xx:xx  192.168.0.0  \n 在
-     通知：用户上下线需要通知所有用户
-     消息接收格式：消息通知 201x-xx-xx xx:xx:xx   xx下线
-     消息接收格式：消息通知 201x-xx-xx xx:xx:xx   xx上线
+ * 1.6. 基于网络实现群聊、私聊
+ * 私聊：@ip或@昵称，只需要发送指定用户消息
+ * 消息发送格式：@192.168.0.0 在
+ * 消息反馈格式:  反馈消息 201x-xx-xx xx:xx:xx  192.168.0.0  发送成功或发送失败(下线)
+ * 消息接收格式：私聊消息 201x-xx-xx xx:xx:xx  192.168.0.0  \n 在
+ * 群聊：向所有在线的用户全部发送消息（自己发消息所有人接收，自己不收接收）
+ * 消息发送格式：在
+ * 消息接收格式：群聊消息 201x-xx-xx xx:xx:xx  192.168.0.0  \n 在
+ * 通知：用户上下线需要通知所有用户
+ * 消息接收格式：消息通知 201x-xx-xx xx:xx:xx   xx下线
+ * 消息接收格式：消息通知 201x-xx-xx xx:xx:xx   xx上线
  */
 /*
     服务器端：
@@ -49,7 +49,7 @@ public class Server {
         // 建立服务器
         ServerSocket serverSocket = new ServerSocket(8888);
         System.out.println("服务器启动");
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             Socket client = serverSocket.accept(); // 等待请求 - 只运行一次
             // 用户上线
             clients.add(client);
@@ -71,9 +71,11 @@ public class Server {
                             // 私聊
                             if (matcher.find()) {
                                 String ip = matcher.group(1);
+                                Boolean bool = false;
                                 for (Socket socket : clients) {
                                     //向指定用户发送私聊
                                     if (socket.getInetAddress().getHostAddress().equals(ip)) {
+                                        bool = true;
                                         try {
                                             OutputStream os = socket.getOutputStream();
                                             os.write(msg.getBytes("UTF-8"));
@@ -83,6 +85,9 @@ public class Server {
                                             e.printStackTrace();
                                         }
                                     }
+                                }
+                                if (!bool) {
+                                    client.getOutputStream().write("用户不在线".getBytes("UTF-8"));
                                 }
                             } else {
                                 // 群聊

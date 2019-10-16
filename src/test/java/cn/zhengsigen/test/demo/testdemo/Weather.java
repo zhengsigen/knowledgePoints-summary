@@ -17,7 +17,7 @@ import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Test7 {
+public class Weather {
     /*
     1.7. 获取今天实时的天气
     调用API

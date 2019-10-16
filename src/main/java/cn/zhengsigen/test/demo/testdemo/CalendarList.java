@@ -9,7 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Test3 {
+public class CalendarList {
     /*
     1.3. 日历输出
     请在控制台输出: 指定日期的日历, 并在指定日期所在日右侧上添加*
@@ -28,19 +28,19 @@ public class Test3 {
         } catch (Exception e) {
             System.out.println("日期格式错误");
         }
-        Calendar cal = Calendar.getInstance();
+        java.util.Calendar cal = java.util.Calendar.getInstance();
         cal.setTime(parse);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        int weekDay = cal.get(Calendar.DAY_OF_WEEK);
-        Calendar today = Calendar.getInstance();
+        int day = cal.get(java.util.Calendar.DAY_OF_MONTH);
+        int weekDay = cal.get(java.util.Calendar.DAY_OF_WEEK);
+        java.util.Calendar today = java.util.Calendar.getInstance();
         today.setTime(new Date());
         int last = cal.getActualMaximum(cal.DAY_OF_MONTH);
         System.out.print("当前日历：" + date + " " + weekNums[weekDay - 1]);
-        System.out.println("  返回当天：" + sdf.format(new Date()) + " " + weekNums[today.get(Calendar.DAY_OF_WEEK) - 1]);
+        System.out.println("  返回当天：" + sdf.format(new Date()) + " " + weekNums[today.get(java.util.Calendar.DAY_OF_WEEK) - 1]);
         System.out.println("一  二  三  四  五  六  日");
-        cal.set(Calendar.DAY_OF_MONTH, 1);
+        cal.set(java.util.Calendar.DAY_OF_MONTH, 1);
         //一个月的第一天是星期几
-        int start = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        int start = cal.get(java.util.Calendar.DAY_OF_WEEK) - 1;
         for (int i = 1; i < start; i++) {
             System.out.print("  " + " " + "\t");
         }
@@ -57,10 +57,10 @@ public class Test3 {
         System.out.println();
         System.out.println("----------------------------------------------");
         System.out.print("当前日历：" + date + " " + weekNums[weekDay - 1]);
-        System.out.println("  返回当天：" + sdf.format(new Date()) + " " + weekNums[today.get(Calendar.DAY_OF_WEEK) - 1]);
+        System.out.println("  返回当天：" + sdf.format(new Date()) + " " + weekNums[today.get(java.util.Calendar.DAY_OF_WEEK) - 1]);
         System.out.println("日  一  二  三  四  五  六 ");
-        cal.set(Calendar.DAY_OF_MONTH, 1);
-        int start2 = cal.get(Calendar.DAY_OF_WEEK);
+        cal.set(java.util.Calendar.DAY_OF_MONTH, 1);
+        int start2 = cal.get(java.util.Calendar.DAY_OF_WEEK);
         for (int i = 1; i < start2; i++) {
             System.out.print("  " + " " + "\t");
         }

@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Test2 {
+public class ExceptionHandle {
     /*
         1.2. 异常处理
     自定义一个异常
@@ -127,9 +127,9 @@ public class Test2 {
 
     //ClassNotFoundException找不到类型异常
     public void exception9() throws NoSuchMethodException {
-        //复现 Class<?> test1 = Class.forName("Test1");
+        //复现 Class<?> test1 = Class.forName("T");
         try {
-            Class<?> test1 = Class.forName("Test1");
+            Class<?> test1 = Class.forName("T");
         } catch (Exception e) {
             System.out.println("找不到当前类");
         }
@@ -137,7 +137,7 @@ public class Test2 {
 
     //NoSuchMethodException找不到方法
     public void exception10() throws ClassNotFoundException {
-        Class<?> test1 = Class.forName("Test1");
+        Class<?> test1 = Class.forName("T");
         // 复现 test1.getMethod("show");
         try {
             test1.getMethod("show");

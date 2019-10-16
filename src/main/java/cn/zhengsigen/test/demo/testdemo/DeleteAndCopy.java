@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Scanner;
 
-public class Test5 {
+public class DeleteAndCopy {
     /*
     1.5. 删除/复制一个文件(夹)
         删除: 自己写代码, 引用工具类除外
@@ -29,25 +29,49 @@ public class Test5 {
         f.delete();
     }
 
-    public void copyFile() throws IOException {
-        File destDir = new File("src/main/resources/新建文件夹");
-        if (destDir.exists()) {
-            System.out.println("存储路径已经存在，是否覆盖？\n1、覆盖 2、取消");
-            Scanner sc = new Scanner(System.in);
-            if (sc.nextInt() != 1) {
-                return;
+    public void copyFiles() throws IOException {
+        File destDir = new File("src/main/resources/1.html");
+        File source = new File("src/main/resources/字体/1.html");
+        //如果源是文件
+        if (source.isFile()) {
+            //如果目的地存在
+            if (destDir.exists()) {
+                //如果目的地是文件夹，直接复制进去
+                if (destDir.isDirectory()) {
+                    File file = new File(destDir.getPath() + "/" + source.getName());
+                    Files.copy(source.toPath(), file.toPath());
+                } else {
+                    //如果目的地是文件
+                    System.out.println("文件已经存在，是否覆盖？\n1、覆盖 2、取消");
+                    Scanner sc = new Scanner(System.in);
+                    if (sc.nextInt() != 1) {
+                        return;
+                    }
+                    destDir.delete();
+                    Files.copy(source.toPath(), destDir.toPath());
+                }
+                //如果目的地不存在
+            } else {
+                Files.copy(source.toPath(), destDir.toPath());
             }
-            delFile(destDir);
-            destDir.mkdirs();
         }
-        if (!destDir.exists()) {
+        //如果源是目录
+        else {
+            //如果目的地存在
+            if (destDir.exists()) {
+                System.out.println("存储路径已经存在，是否覆盖？\n1、覆盖 2、取消");
+                Scanner sc = new Scanner(System.in);
+                if (sc.nextInt() != 1) {
+                    return;
+                }
+                delFile(destDir);
+            }
             destDir.mkdirs();
+            copyFile(source, destDir);
         }
-        File source = new File("src/main/resources/字体");
-        copyFile(source, destDir);
     }
 
-    //递归
+    //递归复制
     public void copyFile(File fileInTo, File fileOutTo) throws IOException {
         File[] listFiles = fileInTo.listFiles();
         for (File file : listFiles) {

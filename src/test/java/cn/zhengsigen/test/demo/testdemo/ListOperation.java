@@ -9,7 +9,7 @@ import java.util.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Test1 {
+public class ListOperation {
     Integer[] nums = {1, 2, 33, 3, 3, 3, 4, 62, 124, 12, 56, 1, 23, 45, 1, 2, 41, 2, 33, 55, 1, 2, 35, 23, 4, 54, 7, 1, 3, 34, 42, 3, 32, 32, 3, 3, 3, 3, 5};
     Integer[] numsCopy = {3, 3, 5, 1, 5, 6, 1, 33, 5, 5, 134, 12, 412, 3, 3, 64, 634, 2134, 1234, 12, 34, 1234, 12, 4};
     /*
@@ -25,8 +25,8 @@ public class Test1 {
      */
     //1统计两个数组中共同出现的数字 以及 求共同出现次数最多的数字是哪个有几次?
     public void aggregate1() {
-        List<Integer> integers = new ArrayList(Arrays.asList(nums));
-        List<Integer> integersCopy = new ArrayList(Arrays.asList(numsCopy));
+        List<Integer> integers = new java.util.ArrayList(Arrays.asList(nums));
+        List<Integer> integersCopy = new java.util.ArrayList(Arrays.asList(numsCopy));
         Map<Integer, Integer> map = new HashMap<>();
         //获取共同出现的数字
         for (Integer integer : integersCopy) {
@@ -80,7 +80,7 @@ public class Test1 {
     }
     //4统计出现次数最多的数: 比如: 3,78(出现次数相同一起列出), 出现次数:9.
     public void aggregate4() {
-        List<Integer> integers = new ArrayList(Arrays.asList(nums));
+        List<Integer> integers = new java.util.ArrayList(Arrays.asList(nums));
         Map<Integer, Integer> map = new HashMap<>();
         for (Integer integer : integers) {
             if (map.containsKey(integer)) {
@@ -114,7 +114,7 @@ public class Test1 {
     }
     //5输出每个数字出现的数字: (资料出现的次数从大到小)
     public void aggregate5() {
-        List<Integer> integers = new ArrayList(Arrays.asList(nums));
+        List<Integer> integers = new java.util.ArrayList(Arrays.asList(nums));
         Map<Integer, Integer> map = new HashMap<>();
         for (Integer integer : integers) {
             if (map.containsKey(integer)) {
@@ -124,7 +124,7 @@ public class Test1 {
             }
         }
         //将map.entrySet()转换成list
-        List<Map.Entry<Integer, Integer>> list_Data = new ArrayList<Map.Entry<Integer, Integer>>(map.entrySet());
+        List<Map.Entry<Integer, Integer>> list_Data = new java.util.ArrayList<Map.Entry<Integer, Integer>>(map.entrySet());
         //自定义排序规则
         Collections.sort(list_Data, new Comparator<Map.Entry<Integer, Integer>>() {
             public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {

@@ -7,7 +7,7 @@ import java.util.List;
  * 使用数组
  */
 public class ImplementArray implements DSList {
-    Object[] arr = new Integer[4];
+    Object[] arr = new Object[4];
     Integer index = 0;
 
     @Override
@@ -26,9 +26,10 @@ public class ImplementArray implements DSList {
         for (int i = newArray.length - 1; i > index; i--) {
             newArray[i] = newArray[i - 1];
         }
-        newArray[index] = (int) object;
+        newArray[index] = object;
         arr = newArray;
         dynamicArr(index);
+        this.index++;
         return false;
     }
 
@@ -56,7 +57,7 @@ public class ImplementArray implements DSList {
 
     @Override
     public int lastIndexOf(Object o) {
-        for (int i = arr.length - 1; i >= 0; i--) {
+        for (int i = index - 1; i >= 0; i--) {
             if (arr[i].equals(o)) {
                 return i;
             }
@@ -72,6 +73,7 @@ public class ImplementArray implements DSList {
         for (int i = 0; i < arr.length; i++) {
             if (i == index) {
                 object = arr[i];
+                this.index--;
                 continue;
             }
             temp[addIndex++] = arr[i];
@@ -84,13 +86,17 @@ public class ImplementArray implements DSList {
     public boolean remove(Object object) {
         Object[] temp = new Object[arr.length];
         Integer addIndex = 0;
+        boolean b = false;
         for (int i = 0; i < arr.length; i++) {
             if (!arr[i].equals(object)) {
                 temp[addIndex++] = arr[i];
+            } else {
+                b = true;
+                index--;
             }
         }
         arr = temp;
-        return false;
+        return b;
     }
 
     @Override
@@ -131,19 +137,27 @@ public class ImplementArray implements DSList {
 
     @Override
     public Object[] subList(int fromIndex, int endIndex) {
-        Object[] temp = new Object[arr.length];
+        Object[] temp = new Object[index];
         Integer index = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (i >= fromIndex && i <= endIndex) {
+        for (int i = 0; i < this.index; i++) {
+            if (i >= fromIndex && i < endIndex) {
                 temp[index++] = arr[i];
             }
         }
-        return temp;
+        Object[] objects = new Object[index];
+        for (int i = 0; i < index; i++) {
+            objects[i] = temp[i];
+        }
+        return objects;
     }
 
     @Override
     public Object[] toArray() {
-        return arr;
+        Object[] objects = new Object[index];
+        for (int i = 0; i < index; i++) {
+            objects[i] = arr[i];
+        }
+        return objects;
     }
 
     public void dynamicArr(Integer index) {
